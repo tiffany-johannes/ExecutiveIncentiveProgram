@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REMAX Executive — Recruiter Incentive Financial Model</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f4f6fb; color: #222; padding: 20px; }
+.wrap { max-width: 980px; margin: 0 auto; }
+.header { background: #003DA5; color: white; border-radius: 10px; padding: 18px 22px; margin-bottom: 20px; }
+.header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.header p { font-size: 13px; opacity: 0.85; }
+.controls { display: flex; gap: 24px; flex-wrap: wrap; background: #f0f4ff; padding: 16px; border-radius: 8px; margin-bottom: 24px; }
+.ctrl label { display: block; font-weight: 700; font-size: 12px; margin-bottom: 4px; }
+.ctrl input[type=range] { width: 150px; cursor: pointer; vertical-align: middle; }
+.ctrl .val { margin-left: 8px; font-weight: 700; color: #003DA5; font-size: 13px; }
+.ctrl .sub { font-size: 11px; color: #777; margin-top: 2px; }
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-btn { padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 700; background: #e8edf7; color: #333; font-family: Arial; }
+.tab-btn.active { background: #003DA5; color: white; }
+.section { display: none; }
+.section.active { display: block; }
+.step-list { background: white; border: 1px solid #dde3f0; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+.step-lbl { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 14px; }
+.step-row { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 6px; margin-bottom: 4px; }
+.step-row.even { background: #f7f9ff; }
+.step-row.odd { background: white; }
+.step-name { flex: 2; font-size: 13px; color: #333; }
+.step-calc { flex: 2; font-size: 12px; color: #999; font-style: italic; }
+.step-val { flex: 1; font-size: 15px; font-weight: 700; text-align: right; }
+.total-bar { display: flex; align-items: center; background: #003DA5; color: white; border-radius: 8px; padding: 12px 14px; margin-top: 10px; }
+.total-bar .lbl { flex: 3; font-size: 14px; font-weight: 700; }
+.total-bar .val { font-size: 24px; font-weight: 700; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.stat-card { border-radius: 8px; padding: 12px 14px; }
+.stat-card .lbl { font-size: 11px; color: #888; margin-bottom: 3px; }
+.stat-card .val { font-size: 17px; font-weight: 700; }
+.stat-card.navy { background: #003DA5; }
+.stat-card.navy .lbl { color: rgba(255,255,255,0.7); }
+.stat-card.navy .val { color: white; font-size: 20px; }
+.info-box { border-radius: 8px; padding: 14px; font-size: 13px; line-height: 1.6; margin-top: 16px; }
+.info-box.green { background: #e8f5e9; border: 1px solid #81c784; }
+.info-box.amber { background: #fff8e1; border: 1px solid #f0c040; }
+.scene-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.scene-card { background: white; border: 1px solid #dde3f0; border-radius: 10px; overflow: hidden; }
+.scene-head { color: white; padding: 12px 16px; }
+.scene-head .big { font-size: 24px; font-weight: 700; }
+.scene-head .sub { font-size: 12px; opacity: 0.8; }
+.scene-body { padding: 14px 16px; }
+.scene-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-top: 0.5px solid #eee; }
+.scene-row:first-child { border-top: none; padding-top: 0; }
+.scene-row .rl { color: #666; }
+.scene-row .rv { font-weight: 500; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { padding: 8px 12px; text-align: left; font-weight: 700; white-space: nowrap; background: #003DA5; color: white; }
+td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; white-space: nowrap; }
+tr.hi td { background: #E6F1FB; font-weight: 700; color: #003DA5; }
+tr.net td { background: #EAF5EE; font-weight: 700; color: #1a7a2e; }
+tr.tot-row td { background: #003DA5; color: white; font-weight: 700; }
+tr:nth-child(even):not(.hi):not(.net):not(.tot-row) td { background: #f7f9ff; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-bottom: 20px; }
+.tc-left { background: #D6E4F7; padding: 10px 14px; font-size: 13px; font-weight: 700; color: #003DA5; }
+.tc-right { background: #EEF4FC; padding: 10px 14px; font-size: 13px; color: #333; }
+.tc-left.alt { background: #F2F2F2; color: #003DA5; }
+.tc-right.alt { background: white; }
+.footer { margin-top: 24px; font-size: 12px; color: #aaa; text-align: center; }
+@media(max-width:600px){ .two-col{ grid-template-columns:1fr; } }
+@media print {
+  body { background: white; padding: 10px; }
+  .controls { display: none; }
+  .tabs { display: none; }
+  .section { display: block !important; page-break-after: always; }
+  .section:last-child { page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>REMAX Executive — Recruiter Incentive Financial Model</h1>
+    <p id="hdr-sub">$154K gross commission at 2.5% on $6.16M volume | REMAX Executive earns 4% of gross | LLC earns 1% separately | $12,000/yr agent fee</p>
+  </div>
+
+  <div class="controls">
+    <div class="ctrl">
+      <label>Annual Agent Fee</label>
+      <input type="range" id="agentFee" min="12000" max="14400" step="200" value="12000" oninput="update()">
+      <span class="val" id="agentFeeVal">$12,000</span>
+      <div class="sub" id="agentFeeMo">$1,000/mo</div>
+    </div>
+    <div class="ctrl">
+      <label>Trip Prize Budget</label>
+      <input type="range" id="tripCost" min="7000" max="10000" step="250" value="9000" oninput="update()">
+      <span class="val" id="tripCostVal">$9,000</span>
+    </div>
+    <div class="ctrl">
+      <label>Ticket Threshold</label>
+      <input type="range" id="ticketThresh" min="1000000" max="3000000" step="500000" value="1000000" oninput="update()">
+      <span class="val" id="ticketThreshVal">1 ticket / $1.0M</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('perAgent',this)">Per Agent Math</button>
+    <button class="tab-btn" onclick="showTab('scenarios',this)">25 / 50 / 75 / 100 Agents</button>
+    <button class="tab-btn" onclick="showTab('prizes',this)">Prize Costs</button>
+  </div>
+
+  <!-- PER AGENT TAB -->
+  <div id="tab-perAgent" class="section active">
+    <div style="font-weight:700;font-size:14px;color:#003DA5;margin-bottom:12px;">Revenue Breakdown — Average Agent ($154K Gross Commission)</div>
+    <div class="step-list">
+      <div class="step-lbl">The Math — Step by Step</div>
+      <div class="step-row even">
+        <div class="step-name">Average agent sales volume</div>
+        <div class="step-calc">$154K gross ÷ 2.5%</div>
+        <div class="step-val" style="color:#555">$6,160,000</div>
+      </div>
+      <div class="step-row odd">
+        <div class="step-name">Gross commission on that volume</div>
+        <div class="step-calc">$6.16M × 2.5%</div>
+        <div class="step-val" style="color:#003DA5">$154,000</div>
+      </div>
+      <div class="step-row even">
+        <div class="step-name">Agent keeps (95%)</div>
+        <div class="step-calc">$154K × 95%</div>
+        <div class="step-val" style="color:#888">$146,300</div>
+      </div>
+      <div class="step-row odd">
+        <div class="step-name">REMAX Executive earns (4% of gross)</div>
+        <div class="step-calc">$154K × 4%</div>
+        <div class="step-val" style="color:#1a7a2e">$6,160</div>
+      </div>
+      <div class="step-row even">
+        <div class="step-name">LLC earns (1% of gross — separate)</div>
+        <div class="step-calc">$154K × 1%</div>
+        <div class="step-val" style="color:#aaa">$1,540</div>
+      </div>
+      <div class="step-row odd">
+        <div class="step-name">Annual agent fee</div>
+        <div class="step-calc">Flat fee for 95% plan</div>
+        <div class="step-val" style="color:#1a7a2e" id="pa-fee">$12,000</div>
+      </div>
+      <div class="total-bar">
+        <div class="lbl">Total Revenue to REMAX Executive per Agent per Year</div>
+        <div class="val" id="pa-total">$18,160</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card" style="background:#f7f9ff;">
+        <div class="lbl">Sales Volume (avg agent)</div>
+        <div class="val" style="color:#003DA5;">$6,160,000</div>
+      </div>
+      <div class="stat-card" style="background:#f7f9ff;">
+        <div class="lbl">Gross Commission</div>
+        <div class="val" style="color:#003DA5;">$154,000</div>
+      </div>
+      <div class="stat-card" style="background:#EAF5EE;">
+        <div class="lbl">REMAX Exec Earns (4%)</div>
+        <div class="val" style="color:#1a7a2e;">$6,160</div>
+      </div>
+      <div class="stat-card" style="background:#EAF5EE;">
+        <div class="lbl">Annual Agent Fee</div>
+        <div class="val" style="color:#1a7a2e;" id="pa-fee2">$12,000</div>
+      </div>
+      <div class="stat-card navy">
+        <div class="lbl">Total Revenue / Agent / Yr</div>
+        <div class="val" id="pa-total2">$18,160</div>
+      </div>
+      <div class="stat-card" style="background:#FFF8E0;">
+        <div class="lbl">Marketing Credit (this tier)</div>
+        <div class="val" style="color:#b36800;">$1,000</div>
+      </div>
+      <div class="stat-card" style="background:#EEEDFE;">
+        <div class="lbl">Raffle Tickets Earned</div>
+        <div class="val" style="color:#5533aa;" id="pa-tickets">6 tickets</div>
+      </div>
+    </div>
+
+    <div class="info-box green">
+      <strong>Confirmed math:</strong> $154K is the gross commission on $6.16M in sales volume at 2.5%.
+      REMAX Executive earns 4% of that gross = <strong>$6,160</strong>.
+      LLC earns its 1% separately and does not come out of REMAX Executive's cut.
+      Add the annual agent fee and total revenue per recruited agent is shown above.
+    </div>
+  </div>
+
+  <!-- SCENARIOS TAB -->
+  <div id="tab-scenarios" class="section">
+    <div class="scene-grid" id="scene-cards"></div>
+    <div style="overflow-x:auto;margin-bottom:16px;">
+      <table id="scene-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>25 Agents</th>
+            <th>50 Agents</th>
+            <th>75 Agents</th>
+            <th>100 Agents</th>
+          </tr>
+        </thead>
+        <tbody id="scene-tbody"></tbody>
+      </table>
+    </div>
+    <div class="info-box green" id="scene-note"></div>
+  </div>
+
+  <!-- PRIZES TAB -->
+  <div id="tab-prizes" class="section">
+    <div style="font-weight:700;font-size:14px;color:#003DA5;margin-bottom:12px;">Prize Budget by Scenario</div>
+    <div style="overflow-x:auto;margin-bottom:20px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Prize</th>
+            <th>Budget</th>
+            <th>25 agents</th>
+            <th>50 agents</th>
+            <th>75 agents</th>
+            <th>100 agents</th>
+          </tr>
+        </thead>
+        <tbody id="prize-tbody"></tbody>
+      </table>
+    </div>
+    <div class="info-box green" id="prize-note"></div>
+  </div>
+
+  <div class="footer">REMAX Executive — Recruiter Rewards Program 2026 &nbsp;|&nbsp; Confidential</div>
+</div>
+
+<script>
+const GROSS = 154000;
+const EXEC_COMM = GROSS * 0.04;  // $6,160
+const SALES_VOL = GROSS / 0.025; // $6,160,000
+const MKT_CREDIT = 1000;         // avg agent is Tier 2
+
+const PRIZE_KEYS    = ["grand","second","third","fourth","fifth"];
+const PRIZE_BUDGETS = { grand:9000, second:3500, third:1500, fourth:750, fifth:500 };
+const PRIZE_LABELS  = {
+  grand:  "Grand Prize — Luxury Trip",
+  second: "2nd Place — Winner's Choice",
+  third:  "3rd Place — Winner's Choice",
+  fourth: "4th Place — Winner's Choice",
+  fifth:  "5th Place — Winner's Choice",
+};
+const PRIZE_MIN = [0,0,0,26,51];
+const AGENT_COUNTS = [25,50,75,100];
+const CARD_COLORS  = ["#003DA5","#1a7a2e","#cc7700","#5533aa"];
+
+function getPrizeCount(n){ return n<=25?3:n<=50?4:5; }
+
+function fmt(n){
+  if(n<0) return "-$"+Math.abs(Math.round(n)).toLocaleString();
+  return "$"+Math.round(n).toLocaleString();
+}
+
+function calcScenario(count, agentFee, tripCost){
+  const prizeCount   = getPrizeCount(count);
+  const activeKeys   = PRIZE_KEYS.slice(0,prizeCount);
+  const prizeBudget  = activeKeys.reduce((a,k)=>a+(k==="grand"?tripCost:PRIZE_BUDGETS[k]),0);
+  const rev          = (EXEC_COMM + agentFee) * count;
+  const mkt          = MKT_CREDIT * count;
+  const incentive    = mkt + prizeBudget;
+  const net          = rev - incentive;
+  const pct          = (incentive/rev*100).toFixed(1);
+  return { count, prizeCount, rev, commRev:EXEC_COMM*count, feeRev:agentFee*count, mkt, prizeBudget, incentive, net, pct };
+}
+
+function update(){
+  const agentFee   = parseInt(document.getElementById("agentFee").value);
+  const tripCost   = parseInt(document.getElementById("tripCost").value);
+  const ticketTh   = parseInt(document.getElementById("ticketThresh").value);
+  const revenuePA  = EXEC_COMM + agentFee;
+  const tickets    = Math.floor(SALES_VOL / ticketTh);
+
+  // Update control displays
+  document.getElementById("agentFeeVal").textContent  = fmt(agentFee);
+  document.getElementById("agentFeeMo").textContent   = fmt(Math.round(agentFee/12))+"/mo";
+  document.getElementById("tripCostVal").textContent  = fmt(tripCost);
+  document.getElementById("ticketThreshVal").textContent = "1 ticket / $"+(ticketTh/1000000).toFixed(1)+"M";
+  document.getElementById("hdr-sub").textContent =
+    "$154K gross commission at 2.5% on $6.16M volume | REMAX Executive earns 4% of gross | LLC earns 1% separately | "+fmt(agentFee)+"/yr agent fee";
+
+  // Per agent tab
+  document.getElementById("pa-fee").textContent   = fmt(agentFee);
+  document.getElementById("pa-fee2").textContent  = fmt(agentFee);
+  document.getElementById("pa-total").textContent = fmt(revenuePA);
+  document.getElementById("pa-total2").textContent= fmt(revenuePA);
+  document.getElementById("pa-tickets").textContent = tickets+" tickets";
+
+  const scenarios = AGENT_COUNTS.map(c => calcScenario(c, agentFee, tripCost));
+
+  // Scenario cards
+  document.getElementById("scene-cards").innerHTML = scenarios.map((s,i) => `
+    <div class="scene-card">
+      <div class="scene-head" style="background:${CARD_COLORS[i]}">
+        <div class="big">${s.count} agents</div>
+        <div class="sub">${s.prizeCount} prizes at gala</div>
+      </div>
+      <div class="scene-body">
+        <div class="scene-row"><span class="rl">Commission Revenue (4%)</span><span class="rv">${fmt(s.commRev)}</span></div>
+        <div class="scene-row"><span class="rl">Annual Agent Fees</span><span class="rv">${fmt(s.feeRev)}</span></div>
+        <div class="scene-row"><span class="rl">Total Revenue</span><span class="rv" style="font-weight:700;color:${CARD_COLORS[i]}">${fmt(s.rev)}</span></div>
+        <div class="scene-row"><span class="rl">Marketing Credits</span><span class="rv">${fmt(s.mkt)}</span></div>
+        <div class="scene-row"><span class="rl">Prize Pool</span><span class="rv">${fmt(s.prizeBudget)}</span></div>
+        <div class="scene-row"><span class="rl">Total Program Cost</span><span class="rv" style="color:#cc3300">${fmt(s.incentive)}</span></div>
+        <div class="scene-row"><span class="rl">% of Revenue</span><span class="rv" style="color:#888">${s.pct}%</span></div>
+        <div class="scene-row"><span class="rl">Net to Broker</span><span class="rv" style="font-weight:700;color:#1a7a2e">${fmt(s.net)}</span></div>
+      </div>
+    </div>
+  `).join("");
+
+  // Scenario table
+  const rows = [
+    { label:"Commission Revenue (4% of gross)", fn:s=>fmt(s.commRev) },
+    { label:"Annual Agent Fees",                fn:s=>fmt(s.feeRev) },
+    { label:"Total Revenue",                    fn:s=>fmt(s.rev),       cls:"hi" },
+    { label:"Marketing Credits",                fn:s=>fmt(s.mkt) },
+    { label:"Prize Pool",                       fn:s=>fmt(s.prizeBudget) },
+    { label:"Total Program Cost",               fn:s=>fmt(s.incentive) },
+    { label:"Incentives as % of Revenue",       fn:s=>s.pct+"%" },
+    { label:"Net to Broker",                    fn:s=>fmt(s.net),       cls:"net" },
+    { label:"Prizes Drawn at Gala",             fn:s=>s.prizeCount },
+  ];
+  document.getElementById("scene-tbody").innerHTML = rows.map(row =>
+    `<tr class="${row.cls||""}"><td>${row.label}</td>${scenarios.map(s=>`<td>${row.fn(s)}</td>`).join("")}</tr>`
+  ).join("");
+
+  document.getElementById("scene-note").innerHTML =
+    `<strong>Bottom line:</strong> At 25 recruited agents REMAX Executive generates <strong>${fmt(scenarios[0].rev)}</strong> in total revenue — `+
+    `<strong>${fmt(revenuePA)}</strong> per agent. Net to broker after all incentive costs is <strong>${fmt(scenarios[0].net)}</strong>. `+
+    `At 100 agents that grows to <strong>${fmt(scenarios[3].net)}</strong> net. `+
+    `The program costs only <strong>${scenarios[3].pct}%</strong> of the revenue it generates.`;
+
+  // Prize table
+  document.getElementById("prize-tbody").innerHTML = PRIZE_KEYS.map((key,ki) => {
+    const budget = key==="grand" ? tripCost : PRIZE_BUDGETS[key];
+    const minA   = PRIZE_MIN[ki];
+    const cells  = AGENT_COUNTS.map(c =>
+      c>=minA
+        ? `<td style="color:#1a7a2e;font-weight:600">${fmt(budget)}</td>`
+        : `<td style="color:#ccc">—</td>`
+    ).join("");
+    return `<tr><td>${PRIZE_LABELS[key]}</td><td style="font-weight:700;color:#003DA5">${fmt(budget)}</td>${cells}</tr>`;
+  }).join("") +
+  `<tr class="tot-row"><td>Total Prize Pool</td><td></td>${scenarios.map(s=>`<td>${fmt(s.prizeBudget)}</td>`).join("")}</tr>`;
+
+  const maxPrize = Math.max(...scenarios.map(s=>s.prizeBudget));
+  document.getElementById("prize-note").innerHTML =
+    `<strong>Key point:</strong> The total prize pool — including the grand trip — never exceeds <strong>${fmt(maxPrize)}</strong> `+
+    `regardless of agent count. Marketing credits are the larger variable cost and only paid out as new revenue comes in.`;
+}
+
+function showTab(id, btn){
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  btn.classList.add("active");
+}
+
+// Initialize
+update();
+</script>
+</body>
+</html>
