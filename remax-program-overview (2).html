@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REMAX Executive — Recruiter Rewards Program Overview</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f4f6fb; color: #222; }
+.hero { background: #003DA5; color: white; padding: 44px 40px 32px; }
+.hero-tag { background: #CC0000; display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 3px; margin-bottom: 14px; text-transform: uppercase; }
+.hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.hero p { font-size: 14px; opacity: 0.85; max-width: 700px; line-height: 1.65; }
+.hero-stats { display: flex; gap: 36px; margin-top: 28px; flex-wrap: wrap; }
+.hs-val { font-size: 28px; font-weight: 700; }
+.hs-lbl { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+.nav { background: #002d80; display: flex; overflow-x: auto; padding: 0 32px; gap: 2px; }
+.nb { background: none; border: none; color: rgba(255,255,255,0.55); font-size: 13px; font-weight: 700; padding: 13px 16px; cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; font-family: Arial; letter-spacing: 0.04em; }
+.nb.active, .nb:hover { color: white; border-bottom-color: #CC0000; }
+.content { max-width: 1040px; margin: 0 auto; padding: 32px 24px 60px; }
+.sec { display: none; }
+.sec.active { display: block; }
+h2 { font-size: 22px; font-weight: 700; color: #003DA5; margin-bottom: 8px; }
+h3 { font-size: 15px; font-weight: 700; color: #003DA5; margin-bottom: 6px; }
+p { font-size: 14px; line-height: 1.7; color: #444; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 20px 0; }
+.card { background: white; border-radius: 10px; border: 1px solid #dde3f0; padding: 18px; }
+.card p { font-size: 13px; }
+.stat-row { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+.stat { color: white; border-radius: 10px; padding: 18px 22px; flex: 1; min-width: 150px; }
+.stat-val { font-size: 26px; font-weight: 700; }
+.stat-lbl { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+.navy { background: #003DA5; }
+.red { background: #CC0000; }
+.green { background: #1a7a2e; }
+.purple { background: #5533aa; }
+.amber { background: #b36800; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 20px 0; }
+@media(max-width:640px){ .two-col { grid-template-columns: 1fr; } }
+.hl { border-left: 4px solid #003DA5; background: #E6F1FB; color: #003DA5; border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 18px 0; font-size: 13px; line-height: 1.65; }
+.hl.red { border-left-color: #CC0000; background: #FFF0F0; color: #8B0000; }
+.hl.green { border-left-color: #1a7a2e; background: #EAF5EE; color: #1a7a2e; }
+hr { border: none; border-top: 1px solid #dde3f0; margin: 24px 0; }
+.tl-item { display: flex; gap: 18px; margin-bottom: 22px; align-items: flex-start; }
+.tl-dot { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; color: white; flex-shrink: 0; margin-top: 3px; }
+.tl-body h3 { margin-bottom: 4px; }
+.tl-body p { font-size: 13px; }
+.tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; background: #E6F1FB; color: #003DA5; }
+.tag.red { background: #FFF0F0; color: #CC0000; }
+.tag.green { background: #EAF5EE; color: #1a7a2e; }
+.tag.purple { background: #EEEDFE; color: #5533aa; }
+.prize-card { background: white; border: 1px solid #dde3f0; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+.prize-head { display: flex; align-items: center; gap: 14px; padding: 14px 18px; }
+.prize-badge { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+.prize-name { font-size: 14px; font-weight: 700; color: #111; flex: 1; }
+.prize-cost { font-size: 14px; font-weight: 700; color: #003DA5; white-space: nowrap; }
+.prize-opts { padding: 0 18px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 11px; background: #f0f4ff; color: #003DA5; padding: 3px 10px; border-radius: 4px; }
+.pill.green { background: #EAF5EE; color: #1a7a2e; font-weight: 700; }
+.ret-tier { display: flex; align-items: center; gap: 14px; background: white; border: 1px solid #dde3f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; flex-wrap: wrap; }
+.ret-pct { font-size: 24px; font-weight: 700; min-width: 58px; }
+.ret-desc { flex: 1; font-size: 13px; color: #444; min-width: 180px; }
+.ret-reward { font-size: 13px; font-weight: 700; color: #1a7a2e; text-align: right; }
+.aud-card { border-radius: 10px; padding: 14px 16px; }
+.aud-card h3 { font-size: 13px; margin-bottom: 8px; }
+.aud-card ul { padding-left: 16px; }
+.aud-card li { font-size: 12px; margin-bottom: 4px; line-height: 1.5; }
+.ft { background: #003DA5; color: white; text-align: center; padding: 22px; font-size: 13px; opacity: 0.9; margin-top: 0; }
+table.ft-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
+table.ft-table th { background: #003DA5; color: white; padding: 8px 12px; text-align: left; }
+table.ft-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+table.ft-table tr:nth-child(even) td { background: #f7f9ff; }
+table.ft-table tr.tot td { font-weight: 700; background: #E6F1FB; color: #003DA5; }
+table.ft-table tr.net td { font-weight: 700; background: #EAF5EE; color: #1a7a2e; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">REMAX Executive — Leadership Overview</div>
+  <h1>Recruiter Rewards Program 2026</h1>
+  <p>A company-wide program to drive agent recruitment, reward production-based referrals, support team retention, and celebrate our growth at the Annual Gala.</p>
+  <div class="hero-stats">
+    <div><div class="hs-val">26</div><div class="hs-lbl">Offices participating</div></div>
+    <div><div class="hs-val">420+</div><div class="hs-lbl">Eligible agents</div></div>
+    <div><div class="hs-val">Up to 5</div><div class="hs-lbl">Prize drawings at gala</div></div>
+    <div><div class="hs-val">&lt;3%</div><div class="hs-lbl">Of revenue spent on incentives</div></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nb active" onclick="show('why',this)">WHY</button>
+  <button class="nb" onclick="show('what',this)">WHAT</button>
+  <button class="nb" onclick="show('how',this)">HOW IT WORKS</button>
+  <button class="nb" onclick="show('prizes',this)">PRIZES</button>
+  <button class="nb" onclick="show('retention',this)">RETENTION</button>
+  <button class="nb" onclick="show('financials',this)">FINANCIALS</button>
+  <button class="nb" onclick="show('cadence',this)">CADENCE</button>
+  <button class="nb" onclick="show('groups',this)">AUDIENCE GROUPS</button>
+</div>
+
+<div class="content">
+
+<!-- WHY -->
+<div id="why" class="sec active">
+  <h2>Why We Are Doing This</h2>
+  <p style="margin-bottom:18px;">REMAX Executive's growth depends on bringing in productive agents and keeping the ones we have. Our current agents are the best source of quality recruits. This program gives them a compelling reason to help us grow while protecting our existing agent base through a retention layer.</p>
+  <div class="card-grid">
+    <div class="card"><h3 style="margin-bottom:6px;">Agents know agents</h3><p>Our 420+ agents have relationships with hundreds of productive agents across the market. No recruiter reaches them like a trusted peer.</p></div>
+    <div class="card"><h3 style="margin-bottom:6px;">Quality over quantity</h3><p>By tying rewards to recruit production volume we incentivize bringing in strong performers, not just warm bodies. More production = more tickets = better odds.</p></div>
+    <div class="card"><h3 style="margin-bottom:6px;">Revenue-positive by design</h3><p>The program costs less than 3% of the revenue recruited agents generate. It pays for itself many times over from shared expenses alone.</p></div>
+    <div class="card"><h3 style="margin-bottom:6px;">Recognition and experiences win</h3><p>Top producers earning $250K–$1M a year are not moved by small cash bonuses. Status, experiences, and public gala recognition create real excitement and real behavior change.</p></div>
+  </div>
+  <div class="hl">
+    <strong>The core insight:</strong> A $1,000 cash bonus means little to an agent earning $500K a year. But a luxury trip drawing with their name called at the gala in front of peers, plus a meaningful marketing credit they can invest back into their own business — that creates genuine excitement and changes behavior.
+  </div>
+</div>
+
+<!-- WHAT -->
+<div id="what" class="sec">
+  <h2>What the Program Is</h2>
+  <p style="margin-bottom:18px;">A three-layer incentive system covering individual agents, team leads, and offices — each designed differently, all working together toward one goal: growth and retention at REMAX Executive.</p>
+  <div class="two-col">
+    <div>
+      <div class="card" style="border-left:4px solid #003DA5;margin-bottom:12px;">
+        <h3>Layer 1 — Individual Agents</h3>
+        <p style="font-size:13px;margin-top:6px;">Recruit any agent to REMAX Executive. Earn raffle tickets based on their annual production volume. Earn a flexible marketing credit immediately. Compete in the prize drawing at the Annual Gala.</p>
+      </div>
+      <div class="card" style="border-left:4px solid #1a7a2e;margin-bottom:12px;">
+        <h3>Layer 2 — Team Leads</h3>
+        <p style="font-size:13px;margin-top:6px;">Earn a flat retention reward when your team hits 80%, 90%, or 100% retention at REMAX Executive by December 31st. Choose between a swag bundle or marketing credit at each threshold.</p>
+      </div>
+      <div class="card" style="border-left:4px solid #CC0000;">
+        <h3>Layer 3 — Offices</h3>
+        <p style="font-size:13px;margin-top:6px;">Offices compete on a net recruiting leaderboard updated quarterly. The top recruiting office wins a traveling trophy, an office celebration, and swag bundles for all staff.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="background:#003DA5;border:none;color:white;height:100%;">
+        <h3 style="color:white;margin-bottom:14px;font-size:16px;">Program at a Glance</h3>
+        <div style="font-size:13px;line-height:2.1;opacity:0.92;">
+          <div>&#10003; &nbsp;Open to all 420+ agents company-wide</div>
+          <div>&#10003; &nbsp;Recruits must join REMAX Executive</div>
+          <div>&#10003; &nbsp;Tickets based on recruit's annual sales volume</div>
+          <div>&#10003; &nbsp;Marketing credits are flexible — any business spend</div>
+          <div>&#10003; &nbsp;Prizes drawn at Annual Gala — winners choose their prize</div>
+          <div>&#10003; &nbsp;Up to 5 prizes depending on agents recruited</div>
+          <div>&#10003; &nbsp;Calendar year January 1 through December 31</div>
+          <div>&#10003; &nbsp;Team retention tracked and rewarded separately</div>
+          <div>&#10003; &nbsp;Office leaderboard updated every quarter</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW -->
+<div id="how" class="sec">
+  <h2>How It Works</h2>
+  <div class="tl-item">
+    <div class="tl-dot navy">1</div>
+    <div class="tl-body">
+      <div class="tag">Individual Agent</div>
+      <h3>Recruit an agent to REMAX Executive</h3>
+      <p>Any REMAX Executive agent can refer a recruit. The recruit must join and begin producing under REMAX Executive. There is no cap on how many agents you can recruit.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot navy">2</div>
+    <div class="tl-body">
+      <div class="tag">Marketing Credit</div>
+      <h3>Earn an immediate marketing credit based on their production tier</h3>
+      <p>Tier 1 ($1.5M–$5M) earns you $500. Tier 2 ($5M–$10M) earns $1,000. Tier 3 ($10M+) earns $1,500. Spend on postcards, digital ads, swag, MasterPitch items, headshots, or any marketing spend — your choice.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot green">3</div>
+    <div class="tl-body">
+      <div class="tag green">Raffle Tickets</div>
+      <h3>Accumulate tickets through the year based on your recruit's production</h3>
+      <p>At year end your recruit's actual annual sales volume determines your ticket count — 1 ticket per $1M in production. A $6M producer earns you 6 tickets. Multiple recruits stack. The more productive your recruits, the better your odds.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot red">4</div>
+    <div class="tl-body">
+      <div class="tag red">Gala Drawing</div>
+      <h3>All tickets go into one company-wide pool — drawn live at the Annual Gala</h3>
+      <p>Every winner chooses their own prize from a curated menu in their tier — announced on stage in front of the entire company. The gala is the payoff, but the story builds all year through quarterly leaderboard updates.</p>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot purple">5</div>
+    <div class="tl-body">
+      <div class="tag purple">Team Leads</div>
+      <h3>Team leads earn flat retention rewards at year end — separate from the raffle</h3>
+      <p>Team leads who hit 80%, 90%, or 100% retention of their REMAX team members by December 31st receive a flat reward — same amount regardless of team size. Protects margins while still creating a meaningful incentive.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRIZES -->
+<div id="prizes" class="sec">
+  <h2>Prize Structure</h2>
+  <p style="margin-bottom:8px;">The number of prizes scales with total company-wide recruiting. Every winner chooses their prize live at the gala from a curated menu. A marketing credit is always one of the options at every tier.</p>
+  <div class="stat-row" style="margin:18px 0 24px;">
+    <div class="stat navy"><div class="stat-val">3 prizes</div><div class="stat-lbl">1–25 agents recruited</div></div>
+    <div class="stat red"><div class="stat-val">4 prizes</div><div class="stat-lbl">26–50 agents recruited</div></div>
+    <div class="stat green"><div class="stat-val">5 prizes</div><div class="stat-lbl">51+ agents recruited</div></div>
+  </div>
+
+  <div class="prize-card">
+    <div class="prize-head" style="background:#FFF8E0;">
+      <span class="prize-badge" style="background:#003DA5;color:white;">GRAND PRIZE</span>
+      <span class="prize-name">Luxury Destination Trip for Two</span>
+      <span class="prize-cost">$7,000–$10,000</span>
+    </div>
+    <div class="prize-opts"><span class="pill" style="background:#FFF8E0;color:#996600;">Winner chooses destination — resort, city escape, or adventure trip. Booked and arranged by the company.</span></div>
+  </div>
+
+  <div class="prize-card">
+    <div class="prize-head">
+      <span class="prize-badge" style="background:#1a7a2e;color:white;">2nd PLACE</span>
+      <span class="prize-name">Winner's Choice — up to $3,500</span>
+      <span class="prize-cost">~$2,000–$4,000</span>
+    </div>
+    <div class="prize-opts">
+      <span class="pill">Luxury Weekend Getaway for Two</span>
+      <span class="pill">Full-Year Listing Media Package</span>
+      <span class="pill">Premium Tech Suite</span>
+      <span class="pill">Personal Brand Refresh Package</span>
+      <span class="pill">Elite Coaching or Mastermind Year</span>
+      <span class="pill green">Marketing Credit — $2,000</span>
+    </div>
+  </div>
+
+  <div class="prize-card">
+    <div class="prize-head">
+      <span class="prize-badge" style="background:#cc7700;color:white;">3rd PLACE</span>
+      <span class="prize-name">Winner's Choice — up to $1,500</span>
+      <span class="prize-cost">~$1,000–$1,500</span>
+    </div>
+    <div class="prize-opts">
+      <span class="pill">REMAX Swag + MasterPitch Bundle</span>
+      <span class="pill">Local Luxury Experience</span>
+      <span class="pill">Premium Golf Experience</span>
+      <span class="pill">Smart Home Demo Kit</span>
+      <span class="pill green">Marketing Credit — $1,000</span>
+    </div>
+  </div>
+
+  <div class="prize-card">
+    <div class="prize-head">
+      <span class="prize-badge" style="background:#5533aa;color:white;">4th PLACE</span>
+      <span class="prize-name">Winner's Choice — $750</span>
+      <span class="prize-cost">Unlocks at 50+ agents</span>
+    </div>
+    <div class="prize-opts">
+      <span class="pill">REMAX Swag Shop Credit</span>
+      <span class="pill">Dining and Entertainment Bundle</span>
+      <span class="pill green">Marketing Credit — $750</span>
+    </div>
+  </div>
+
+  <div class="prize-card">
+    <div class="prize-head">
+      <span class="prize-badge" style="background:#888;color:white;">5th PLACE</span>
+      <span class="prize-name">Winner's Choice — $500</span>
+      <span class="prize-cost">Unlocks at 75+ agents</span>
+    </div>
+    <div class="prize-opts">
+      <span class="pill">REMAX Swag Shop Credit</span>
+      <span class="pill">Dinner for Two</span>
+      <span class="pill green">Marketing Credit — $500</span>
+    </div>
+  </div>
+
+  <div class="hl" style="margin-top:20px;">
+    <strong>Always an option:</strong> A marketing credit is available at every prize tier so that agents who prefer to invest in their business over experiences always have a meaningful choice.
+  </div>
+</div>
+
+<!-- RETENTION -->
+<div id="retention" class="sec">
+  <h2>Team Retention Layer</h2>
+  <p style="margin-bottom:18px;">REMAX Executive has teams ranging from 2 to 50 agents. Team leads have enormous influence over whether agents stay at REMAX or leave. This layer creates a low-cost, margin-safe reward for keeping agents here — without impacting existing team agreements.</p>
+  <div class="hl red"><strong>The risk without this layer:</strong> A 50-agent team with 20% annual turnover costs REMAX Executive $100,000+ in lost shared expenses alone. Team leads need to feel a real benefit from retention, not just from production.</div>
+  <hr>
+  <h3 style="margin-bottom:12px;">Flat Retention Rewards — Same Amount Regardless of Team Size</h3>
+  <div class="ret-tier">
+    <div class="ret-pct" style="color:#cc7700;">80%</div>
+    <div class="ret-desc">80% or more of team members still at REMAX Executive on December 31st</div>
+    <div class="ret-reward">REMAX Swag Bundle OR $250 Marketing Credit</div>
+  </div>
+  <div class="ret-tier">
+    <div class="ret-pct" style="color:#1a7a2e;">90%</div>
+    <div class="ret-desc">90% or more of team members still at REMAX Executive on December 31st</div>
+    <div class="ret-reward">MasterPitch Kit OR $500 Marketing Credit</div>
+  </div>
+  <div class="ret-tier">
+    <div class="ret-pct" style="color:#003DA5;">100%</div>
+    <div class="ret-desc">Full team retained at REMAX Executive — zero departures all year</div>
+    <div class="ret-reward">Premium Swag + Gala Recognition OR $750 Marketing Credit</div>
+  </div>
+  <hr>
+  <h3 style="margin-bottom:12px;">By Team Size</h3>
+  <div class="card-grid">
+    <div class="aud-card" style="background:#E6F1FB;color:#003DA5;">
+      <h3>Mega Teams — 30 to 50 agents</h3>
+      <ul><li>Retention is the top priority</li><li>Override structure already drives growth</li><li>Leaderboard and gala recognition add status</li><li>Flat reward protects margins on existing deals</li></ul>
+    </div>
+    <div class="aud-card" style="background:#EAF3DE;color:#3B6D11;">
+      <h3>Mid Teams — 8 to 15 agents</h3>
+      <ul><li>Balance of retention and growth goals</li><li>Marketing credit is most motivating</li><li>Also eligible for the recruiting raffle pool</li><li>Office leaderboard visibility matters here</li></ul>
+    </div>
+    <div class="aud-card" style="background:#EEEDFE;color:#534AB7;">
+      <h3>Small Teams — 2 to 7 agents</h3>
+      <ul><li>Growth is the primary focus</li><li>Raffle tickets for every new team member recruited</li><li>Retention bonus applies at smaller scale</li><li>Milestone swag bundle at 10-agent team size</li></ul>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCIALS -->
+<div id="financials" class="sec">
+  <h2>Financial Model</h2>
+  <p style="margin-bottom:18px;">Based on average agent production of $154,000 per year — approximately $6.16M in sales volume. Revenue model: 2.5% commission rate, broker keeps 5%, pays LLC 1%. Net commission = 0.1% of volume. Plus $12,000–$14,400 per agent in annual shared expenses.</p>
+  <div style="background:#f7f9ff;border:1px solid #dde3f0;border-radius:10px;padding:16px 20px;margin-bottom:20px;">
+    <div style="font-size:12px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Per Average Agent — Annual Math</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
+      <div style="background:white;border-radius:8px;padding:12px 14px;border:1px solid #dde3f0;">
+        <div style="font-size:11px;color:#888;margin-bottom:3px;">Gross commission (2.5% on $6.16M)</div>
+        <div style="font-size:18px;font-weight:700;color:#003DA5;">$154,000</div>
+      </div>
+      <div style="background:white;border-radius:8px;padding:12px 14px;border:1px solid #dde3f0;">
+        <div style="font-size:11px;color:#888;margin-bottom:3px;">REMAX Executive earns (4% of gross)</div>
+        <div style="font-size:18px;font-weight:700;color:#1a7a2e;">$6,160</div>
+      </div>
+      <div style="background:white;border-radius:8px;padding:12px 14px;border:1px solid #dde3f0;">
+        <div style="font-size:11px;color:#888;margin-bottom:3px;">LLC earns (1% of gross — separate)</div>
+        <div style="font-size:18px;font-weight:700;color:#888;">$1,540</div>
+      </div>
+      <div style="background:white;border-radius:8px;padding:12px 14px;border:1px solid #dde3f0;">
+        <div style="font-size:11px;color:#888;margin-bottom:3px;">Annual agent fee (95% plan)</div>
+        <div style="font-size:18px;font-weight:700;color:#1a7a2e;">$12,000</div>
+      </div>
+      <div style="background:#003DA5;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:3px;">Total revenue per agent per year</div>
+        <div style="font-size:22px;font-weight:700;color:white;">$18,160</div>
+      </div>
+      <div style="background:#FFF8E0;border-radius:8px;padding:12px 14px;border:1px solid #f0c040;">
+        <div style="font-size:11px;color:#888;margin-bottom:3px;">Marketing credit given (avg tier)</div>
+        <div style="font-size:18px;font-weight:700;color:#b36800;">$1,000</div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <table class="ft-table">
+    <thead><tr><th>Metric</th><th>25 Agents</th><th>50 Agents</th><th>75 Agents</th><th>100 Agents</th></tr></thead>
+    <tbody>
+      <tr><td>Prizes drawn at gala</td><td>3</td><td>4</td><td>5</td><td>5</td></tr>
+      <tr><td>Commission revenue (4% of gross)</td><td>$154,000</td><td>$308,000</td><td>$462,000</td><td>$616,000</td></tr>
+      <tr><td>Annual agent fees</td><td>$300,000</td><td>$600,000</td><td>$900,000</td><td>$1,200,000</td></tr>
+      <tr class="tot"><td>Total revenue generated</td><td>$454,000</td><td>$908,000</td><td>$1,362,000</td><td>$1,816,000</td></tr>
+      <tr><td>Marketing credits paid out</td><td>$25,000</td><td>$50,000</td><td>$75,000</td><td>$100,000</td></tr>
+      <tr><td>Total prize pool</td><td>~$14,000</td><td>~$14,750</td><td>~$15,250</td><td>~$15,250</td></tr>
+      <tr><td>Total program cost</td><td>~$39,000</td><td>~$64,750</td><td>~$90,250</td><td>~$115,250</td></tr>
+      <tr class="net"><td>Net to broker</td><td>~$415,000</td><td>~$843,250</td><td>~$1,271,750</td><td>~$1,700,750</td></tr>
+    </tbody>
+  </table>
+  <div class="hl green">At every scenario the program is strongly revenue-positive. Even at 25 agents the net to broker is $415,000. At 100 agents that grows to $1.7M net. The prize pool — including the grand trip — never exceeds $15,250 regardless of agent count. Marketing credits are the largest variable cost and scale directly with the growth they generate.</div>
+</div>
+
+<!-- CADENCE -->
+<div id="cadence" class="sec">
+  <h2>Rollout Cadence</h2>
+  <p style="margin-bottom:20px;">Every audience needs a different message at a different time. This plan keeps all four groups energized from pre-launch through gala night and into the next year.</p>
+
+  <div class="tl-item">
+    <div class="tl-dot navy" style="font-size:11px;">PRE</div>
+    <div class="tl-body">
+      <div class="tag">4 to 6 Weeks Before Launch</div>
+      <h3>Leadership, Local Leaders, and Admin</h3>
+      <div class="card-grid" style="margin-top:10px;">
+        <div class="aud-card" style="background:#f0f4ff;color:#003DA5;"><h3>Leadership</h3><ul><li>Approve program structure and prize budgets</li><li>Assign program champion per office</li><li>Finalize prize menu and marketing credit amounts</li></ul></div>
+        <div class="aud-card" style="background:#f0f4ff;color:#003DA5;"><h3>Local Leaders and Admin</h3><ul><li>Office-by-office briefing sessions</li><li>Set up volume tracking system</li><li>Receive talking points and FAQ sheet</li><li>Understand credit distribution process</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot red" style="font-size:11px;">M1</div>
+    <div class="tl-body">
+      <div class="tag red">Month 1 — Launch</div>
+      <h3>Company-Wide Announcement Across All 26 Offices</h3>
+      <div class="card-grid" style="margin-top:10px;">
+        <div class="aud-card" style="background:#fff0f0;color:#8B0000;"><h3>All 420+ Agents</h3><ul><li>Company-wide email with program details and one-pager</li><li>Video message from broker explaining the vision</li><li>Live Q&A walkthrough at every office</li></ul></div>
+        <div class="aud-card" style="background:#fff0f0;color:#8B0000;"><h3>Top Producers</h3><ul><li>Personal call or note from broker</li><li>Emphasize their ticket odds advantage with high-volume recruits</li><li>Early access to marketing credit catalog</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot green" style="font-size:10px;">Q1-3</div>
+    <div class="tl-body">
+      <div class="tag green">Q1, Q2, and Q3 — Quarterly Pulse</div>
+      <h3>Keep Energy Alive All Year</h3>
+      <ul style="font-size:13px;padding-left:18px;margin-top:8px;line-height:2.1;">
+        <li>Company leaderboard email — who has the most tickets and who has recruited</li>
+        <li>Celebrate every new recruit by name in the company newsletter</li>
+        <li>Remind agents of their marketing credit balance and how to spend it</li>
+        <li>Mid-year push email: last chance to earn more tickets before December 31st</li>
+        <li>Monthly office shoutouts for active recruiters at all 26 offices</li>
+        <li>Friendly office vs. office recruiting competition with live standings</li>
+        <li>Admin quarterly check-in and credit distribution update</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-dot purple" style="font-size:11px;">GALA</div>
+    <div class="tl-body">
+      <div class="tag purple">Annual Gala — The Payoff</div>
+      <h3>Make It a Moment Everyone Talks About</h3>
+      <ul style="font-size:13px;padding-left:18px;margin-top:8px;line-height:2.1;">
+        <li>Pre-gala teaser emails building suspense — announce ticket pool total</li>
+        <li>Draw 5th place first and build up to the Grand Prize last</li>
+        <li>Each winner chooses their prize live from the menu on stage</li>
+        <li>Photos and video immediately shared on social media</li>
+        <li>All winners featured in the January company newsletter</li>
+        <li>Next year's program announced at the gala — momentum carries forward</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- GROUPS -->
+<div id="groups" class="sec">
+  <h2>Audience Groups — One-Pager Themes</h2>
+  <p style="margin-bottom:20px;">Each group needs a message written specifically for them. The agent one-pager is attached. Below are the themes and key messages for each remaining group — ready to build out into full one-pagers.</p>
+
+  <div class="card-grid">
+    <div class="card" style="border-top:4px solid #003DA5;">
+      <h3>Agents</h3>
+      <p style="font-size:12px;margin-top:6px;margin-bottom:10px;">Recruit. Earn tickets. Win a trip. Spend your marketing credit however you want. Announced at the gala in front of everyone. The one-pager attached to this overview covers agents fully.</p>
+      <div style="font-size:11px;background:#E6F1FB;color:#003DA5;padding:4px 10px;border-radius:4px;display:inline-block;font-weight:700;">One-pager: attached</div>
+    </div>
+    <div class="card" style="border-top:4px solid #1a7a2e;">
+      <h3>Team Leads</h3>
+      <p style="font-size:12px;margin-top:6px;margin-bottom:10px;">Your team's production brought you here. Now we want to help you keep every one of them. Hit your retention goal and earn a reward — plus you are still eligible for the recruiting raffle pool for any new team members you recruit to REMAX.</p>
+      <div style="font-size:11px;background:#EAF5EE;color:#1a7a2e;padding:4px 10px;border-radius:4px;display:inline-block;font-weight:700;">One-pager: ready to build</div>
+    </div>
+    <div class="card" style="border-top:4px solid #CC0000;">
+      <h3>Office Staff and Admin</h3>
+      <p style="font-size:12px;margin-top:6px;margin-bottom:10px;">You make this program run. When your office wins the traveling trophy, you win too. Quarterly participation bonuses, a swag bundle at year end if targets are hit, and the satisfaction of seeing your office at the top of the leaderboard.</p>
+      <div style="font-size:11px;background:#FFF0F0;color:#CC0000;padding:4px 10px;border-radius:4px;display:inline-block;font-weight:700;">One-pager: ready to build</div>
+    </div>
+    <div class="card" style="border-top:4px solid #5533aa;">
+      <h3>Local Leaders and BICs</h3>
+      <p style="font-size:12px;margin-top:6px;margin-bottom:10px;">Your office's net agent growth directly impacts your override structure. This program gives your agents a powerful reason to recruit for you. Your job is to champion it, celebrate every recruit loudly, and keep the leaderboard front and center at every office meeting.</p>
+      <div style="font-size:11px;background:#EEEDFE;color:#5533aa;padding:4px 10px;border-radius:4px;display:inline-block;font-weight:700;">One-pager: ready to build</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<div class="ft">REMAX Executive &nbsp;|&nbsp; 26 Offices &nbsp;|&nbsp; 420+ Agents &nbsp;|&nbsp; Recruiter Rewards Program 2026</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
